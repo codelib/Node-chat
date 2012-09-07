@@ -1,0 +1,23 @@
+Doctype5
+html
+	head
+		meta(charset='utf-8')
+		title='Noditter'
+		link(href="estilo.css",type="text/css" ,rel="stylesheet")
+		script(src='/socket.io/socket.io.js')
+		script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
+		script
+			var websocket =io.connect();
+			$(document).on("ready",function(){
+				websocket.emit('emitwit');
+				websocket.on('twitting', function(tweets){
+				var primer=tweets[0];
+				$('p').text(primer);
+				});
+			});
+	body
+		h1 Noditter
+		form(id="ejemplo",action="/send", method="POST")
+			input(type="text", lenght="140" ,name="tweet")
+			input(type="submit", value="tweet")
+		p 
