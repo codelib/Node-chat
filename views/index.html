@@ -10,15 +10,80 @@
 	<title>${name}</title>
 	<style type="text/css">
 h2{
+	
+	
+	display:inline-block;
+	margin-right: 20px;
+}
+h1{
+	
 	color: #333333;
 	font-family: Collegiate;
 	font-size: 3em;
 	margin:0 auto;
+}
+
+.u{
+
+	background-color:#A4A4A4;
+	border-radius: 5px;
+	font-family:'Source Sans Pro';
+	font-weight: bolder;
+	font-size: 1.2em;
+	margin-right: 11px;
+	display: inline-block;
+	padding:5px;
 
 }
+
+.t{
+	background-color:#D8D8D8;
+	border-radius: 5px;
+	font-family:'Helvetica';
+	font-weight: normal;
+	font-size: 1em;
+	display: inline-block;
+	padding:5px;
+}
+.rem{background:inherit;
+	position: absolute;
+	display: inline-block;
+		height:30px;
+		right:20px;
+		width:30px;
+		color:#585858;
+		font-size: 25px;
+		transition: all 1s;
+		-mozy-transition: all 1s;
+		-webkit-transition: all 1s;
+		-o-transition: all 1s;	}
+.rem:hover{
+	color:#848484;
+	cursor:pointer;	
+}
+.fav{background:inherit;
+	position: absolute;
+	display: inline-block;
+		height:30px;
+		right:60px;
+		width:30px;
+		color:#585858;
+		font-size: 25px;
+		transition: all 2s;
+		-mozy-transition: all 2s;
+		-webkit-transition: all 2s;
+		-o-transition: all 2s;	}
+.fav:hover{
+	color:#848484;
+	cursor:pointer;	
+}
+
 p{
 	color: #333333;
 	font-family: 'Source Sans Pro';
+}
+input{
+	display:inline-block;
 }
 #banner{
 	background: rgba(199,201,197,0.4);
@@ -26,11 +91,22 @@ p{
 	padding:5px;
 	margin-bottom: 20px;
 }
+#tweetform{
+	width:300px;
+}
+#forma{
+	background-color:#1C1C1C ;
+	border-radius: 5px;
+}
 li{
 	text-decoration: none;
+	list-style-type: none;
+	height:50px;
+	margin-top: 3px;
+	margin-bottom: 1px;
 }
 #cuerpo{
-	background: rgba(47,69,122,0.4);
+	background: rgba(199,201,197,0.4);
 	border-radius: 5px;
 	padding:5px;
 
@@ -55,49 +131,54 @@ li{
 
 					for (var i = tweets.length; i >= 0; i--) {
 
-						$('#contenedor').append('<li>'+ 
-						 	usua[i]+' dice: '+
-							tweets[i]+'</li>');
+						$('#contenedor').append('<li ><p class="u">'+ 
+						 	usua[i]+' dice:</p><p class="t" >'+
+							tweets[i]+'</p><p class="rem"> ✖ </p><p class="fav">✔</p></li>').slideDown(3000);
 
-						$("li").eq(0).hide()
+						$("li").eq(0).hide();
 					//esta bien!!!!	
+					$('.rem').on('click', function(){
+						$(this).parent().remove();
+						$(this).empty();
+					});
 						
-				};});});
+				};});
+			
+		});
 	</script>
 </head>
 
 <body>
 	<div id="banner">
-		<h2>
+		<h1>
 		<svg height="32" width="32" xmlns="http://ww.w3.org/2000/svg" style="overflow:hidden; position:relative;" >
 		<path style="" fill="#333333" stroke="none" d="M21.871,9.814 15.684,16.001 21.871,22.188 18.335,25.725 8.612,16.001 18.335,6.276z"><path/></svg>
 		${name}
 		<svg height="32" width="32" xmlns="http://ww.w3.org/2000/svg" style="overflow:hidden; position:relative;" >
-		<path style="" fill="#333333" stroke="none" d="M10.129,22.186 16.316,15.999 10.129,9.812 13.665,6.276 23.389,15.999 13.665,25.725z"><path/></svg></h2>
+		<path style="" fill="#333333" stroke="none" d="M10.129,22.186 16.316,15.999 10.129,9.812 13.665,6.276 23.389,15.999 13.665,25.725z"><path/></svg></h1>
 		<p>Un experimento de mensajeria con Socket.io hecho por GooComedy.</p>
 		</div>
 	<div id="cuerpo">
 		<form id="forma" ><h2>
 			<svg height="32" width="32" xmlns="http://ww.w3.org/2000/svg" style="overflow:hidden; position:relative;" >
-		<path style="" fill="#333333" stroke="none" d="M21.021,16.349c-0.611-1.104-1.359-1.998-2.109-2.623c-0.875,0.641-1.941,1.031-3.103,1.031c-1.164,0-2.231-0.391-3.105-1.031c-0.75,0.625-1.498,1.519-2.111,2.623c-1.422,2.563-1.578,5.192-0.35,5.874c0.55,0.307,1.127,0.078,1.723-0.496c-0.105,0.582-0.166,1.213-0.166,1.873c0,2.932,1.139,5.307,2.543,5.307c0.846,0,1.265-0.865,1.466-2.189c0.201,1.324,0.62,2.189,1.463,2.189c1.406,0,2.545-2.375,2.545-5.307c0-0.66-0.061-1.291-0.168-1.873c0.598,0.574,1.174,0.803,1.725,0.496C22.602,21.541,22.443,18.912,21.021,16.349zM15.808,13.757c2.362,0,4.278-1.916,4.278-4.279s-1.916-4.279-4.278-4.279c-2.363,0-4.28,1.916-4.28,4.279S13.445,13.757,15.808,13.757z"><path/></svg>
+		<path style="" fill="#F2F2F2" stroke="none" d="M20.771,12.364c0,0,0.849-3.51,0-4.699c-0.85-1.189-1.189-1.981-3.058-2.548s-1.188-0.454-2.547-0.396c-1.359,0.057-2.492,0.792-2.492,1.188c0,0-0.849,0.057-1.188,0.397c-0.34,0.34-0.906,1.924-0.906,2.321s0.283,3.058,0.566,3.624l-0.337,0.113c-0.283,3.283,1.132,3.68,1.132,3.68c0.509,3.058,1.019,1.756,1.019,2.548s-0.51,0.51-0.51,0.51s-0.452,1.245-1.584,1.698c-1.132,0.452-7.416,2.886-7.927,3.396c-0.511,0.511-0.453,2.888-0.453,2.888h26.947c0,0,0.059-2.377-0.452-2.888c-0.512-0.511-6.796-2.944-7.928-3.396c-1.132-0.453-1.584-1.698-1.584-1.698s-0.51,0.282-0.51-0.51s0.51,0.51,1.02-2.548c0,0,1.414-0.397,1.132-3.68H20.771z"><path/></svg>
 			<input id="usuarioid" type="text" lenght="18" name="user" required></h2><h2>
 			<svg height="32" width="32" xmlns="http://ww.w3.org/2000/svg" style="overflow:hidden; position:relative;" >
-		<path style="" fill="#333333" stroke="none" d="M2.021,9.748L2.021,9.748V9.746V9.748zM2.022,9.746l5.771,5.773l-5.772,5.771l2.122,2.123l7.894-7.895L4.143,7.623L2.022,9.746zM12.248,23.269h14.419V20.27H12.248V23.269zM16.583,17.019h10.084V14.02H16.583V17.019zM12.248,7.769v3.001h14.419V7.769H12.248z"><path/></svg>
+		<path style="" fill="#F2F2F2" stroke="none" d="M2.021,9.748L2.021,9.748V9.746V9.748zM2.022,9.746l5.771,5.773l-5.772,5.771l2.122,2.123l7.894-7.895L4.143,7.623L2.022,9.746zM12.248,23.269h14.419V20.27H12.248V23.269zM16.583,17.019h10.084V14.02H16.583V17.019zM12.248,7.769v3.001h14.419V7.769H12.248z"><path/></svg>
 			<input id="tweetform" type="text" lenght="140" name="tweet" required></h2><h2>
-			<svg height="32" width="32" xmlns="http://ww.w3.org/2000/svg" style="overflow:hidden; position:relative;" >
-		<path style="" fill="#333333" stroke="none" d="M5.318,6.684L15.5,24.316L25.682,6.684H5.318z"><path/></svg>
 			<input id="sum"type="submit" value="Tweet!"></h2>
 		</form>
 	<div id="contenedor"></div>
-	<aside id="userinfo">
-		<p>:Usuarios:</p>
-
-		<svg height="32" width="32" xmlns="http://ww.w3.org/2000/svg" style="overflow:hidden; position:relative;" >
-		<path style="" fill="#333333" stroke="none" d="M16,1.466C7.973,1.466,1.466,7.973,1.466,16c0,8.027,6.507,14.534,14.534,14.534c8.027,0,14.534-6.507,14.534-14.534C30.534,7.973,24.027,1.466,16,1.466z M14.757,8h2.42v2.574h-2.42V8z M18.762,23.622H16.1c-1.034,0-1.475-0.44-1.475-1.496v-6.865c0-0.33-0.176-0.484-0.484-0.484h-0.88V12.4h2.662c1.035,0,1.474,0.462,1.474,1.496v6.887c0,0.309,0.176,0.484,0.484,0.484h0.88V23.622z"><path/></svg>
-		<div id="info"></div>
-	</aside>
 	</div>
-	<footer><p>El contenido de esta pagina es hosteado por Noditter.com</p></footer>
+	<footer><p class="hola">El contenido de esta pagina es hosteado por Noditter.com</p><p>ehehehe</p></footer>
+	<script type="text/javascript">
+	$(document).on('ready', function(){
+					$('.rem').on('click', function(){
+						$(this).parent().remove();
+						$(this).empty();
+					});
+
+	});</script>
 
 </body>
 </html>
