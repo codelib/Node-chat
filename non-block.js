@@ -4,7 +4,7 @@ var cons = require('consolidate');
 var http= require('http');
 var app = express();
 var servidor= http.createServer(app);
-servidor.listen(4000);
+servidor.listen(8000);
 var tweets = [];
 var usua = [];
 //configuracion template
@@ -16,7 +16,7 @@ var usua = [];
     app.set('views', './views');
 
 app.get('/', function (req,res){
-	 res.render('index.html',{name:'Noditter.js'}); 
+	 res.render('index.html',{name:'Noditter' }); 
 })
 /*
 app.post('/send', express.bodyParser(), function ( req, res){
@@ -30,9 +30,12 @@ if(req.body && req.body.tweet){
 }
 })*/
 app.get('/tweets', function (req, res){
-	res.send(tweets)
+	res.send(tweets);
+	
 })
-app.get(function(){});
+app.get('/usua', function (req,res){
+	res.send(usua);
+})
 var io= require('socket.io').listen(servidor);
 io.sockets.on('connection', function(socket){
 	console.log('una nueva socket se ha conectado');
@@ -40,12 +43,10 @@ io.sockets.on('connection', function(socket){
 		socket.on('formularioenv',function (mensaje){
 			tweets.push(mensaje);
 		});
+
 		socket.on('userenv',function(user){
 			usua.push(user);
-		});
-		
-	});
-	io.sockets.emit('twitting',tweets);
-	io.sockets.emit('lisus',usua);
-})
+		}); });	
+	io.sockets.emit('twitting',tweets,usua);		
+});
 console.log('localhost: 8000!')
