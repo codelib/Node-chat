@@ -81,6 +81,7 @@ h1{
 p{
 	color: #333333;
 	font-family: 'Source Sans Pro';
+	display:inline-block;
 }
 input{
 	display:inline-block;
@@ -128,20 +129,25 @@ li{
 			//"emit no debe estar anidadado en otro emit, esto causara problemas con socket.io"
 			
 			websocket.on('twitting', function(tweets,usua){
+				$("li").remove();
 
 					for (var i = tweets.length; i >= 0; i--) {
+						if(tweets[i]==undefined||usua[i]==undefined){}else{
 
 						$('#contenedor').append('<li ><p class="u">'+ 
-						 	usua[i]+' dice:</p><p class="t" >'+
-							tweets[i]+'</p><p class="rem"> ✖ </p><p class="fav">✔</p></li>').slideDown(3000);
+						 	usua[i]+' dice:</p><p class></p><p class="t" >'+
+							tweets[i]+'</p><p class="rem"> ✖ </p><p class="fav">✔</p><p class="'+tweets[i]+'"></p></li>').slideDown(3000);
 
-						$("li").eq(0).hide();
+						
 					//esta bien!!!!	
 					$('.rem').on('click', function(){
-						$(this).parent().remove();
+						 var del=$(this).next().next().attr('class')
+						$(this).parent().empty();
 						$(this).empty();
+						websocket.emit('borrar',del);
+						console.log(del);
 					});
-						
+									}			
 				};});
 			
 		});
@@ -170,15 +176,7 @@ li{
 		</form>
 	<div id="contenedor"></div>
 	</div>
-	<footer><p class="hola">El contenido de esta pagina es hosteado por Noditter.com</p><p>ehehehe</p></footer>
-	<script type="text/javascript">
-	$(document).on('ready', function(){
-					$('.rem').on('click', function(){
-						$(this).parent().remove();
-						$(this).empty();
-					});
-
-	});</script>
+	<footer><p class="hola">El contenido de esta pagina es hosteado por Noditter.com</p></footer>
 
 </body>
 </html>
