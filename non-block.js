@@ -47,6 +47,13 @@ io.sockets.on('connection', function(socket){
 		socket.on('userenv',function(user){
 			usua.push(user);
 		}); });	
-	io.sockets.emit('twitting',tweets,usua);		
+	io.sockets.emit('twitting',tweets,usua);
+	socket.on('borrar', function(del){
+		for (var i = tweets.length ; i >= 0; i--) {
+			if(tweets[i]==del){
+				tweets[i]=undefined;
+			}
+		};
+	});		
 });
 console.log('localhost: 8000!')
